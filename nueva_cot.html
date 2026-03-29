@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización ASS-005-YAGM</title>
+    <style>
+        :root {
+            --primary-blue: #005eb8;
+            --primary-orange: #e87722;
+            --text-grey: #666666;
+            --border-color: #dddddd;
+            --bg-color: #f4f4f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 900px; /* Tamaño carta estándar */
+            margin: 0 auto;
+            padding: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            box-sizing: border-box;
+            border-radius: 4px; /* Suavizado sutil de bordes */
+        }
+
+        /* --- Encabezado --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--primary-blue);
+            padding-bottom: 20px;
+        }
+
+        .header-left { width: 55%; }
+        .header-right { width: 40%; text-align: right; }
+
+        .logo-simulado {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--primary-blue);
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+        }
+        
+        .company-subtitle {
+            color: var(--primary-blue);
+            font-weight: 700;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .company-details {
+            font-size: 0.85em;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .cotizacion-title {
+            font-size: 2.8em;
+            font-weight: 800;
+            margin: 0;
+            color: #222;
+            letter-spacing: -1px;
+        }
+
+        .folio {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin: 5px 0 15px 0;
+            color: #444;
+        }
+
+        .fecha {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .validez-box {
+            background-color: #fff0e6;
+            border: 1px solid var(--primary-orange);
+            color: #cc5500;
+            padding: 8px 12px;
+            display: inline-block;
+            font-weight: 700;
+            font-size: 0.85em;
+            border-radius: 4px;
+        }
+
+        /* --- Sección Cliente (Mejorada y Centrada) --- */
+        .cliente-wrapper {
+            display: flex;
+            justify-content: center; /* Centrado horizontal */
+            margin-bottom: 40px;
+        }
+
+        .cliente-card {
+            display: flex;
+            background-color: #fdfdfd;
+            padding: 15px 25px;
+            border-left: 5px solid var(--primary-orange); /* Detalle de diseño */
+            width: 85%; /* Ancho controlado para centrar */
+        }
+
+        .cliente-label {
+            color: var(--primary-blue);
+            font-size: 1.2em;
+            font-weight: 800;
+            margin-right: 20px;
+            min-width: 80px;
+            padding-top: 2px; /* Alineación óptica */
+        }
+
+        .cliente-data {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .cliente-data a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            border-bottom: 1px dotted var(--primary-blue);
+        }
+
+        /* --- Tabla Principal --- */
+        .table-container {
+            margin-bottom: 30px;
+        }
+
+        .main-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .main-table thead th {
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+            border: 1px solid #d16b1e;
+        }
+
+        .main-table tbody td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            vertical-align: top;
+            font-size: 0.9em;
+        }
+
+        .col-cant, .col-unidad { text-align: center; color: #555; }
+        .col-desc { text-align: left; }
+        
+        /* Celdas vacías con ancho fijo */
+        .col-valor, .col-total { width: 15%; }
+
+        /* --- Sección de Totales --- */
+        .totals-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            align-items: flex-start;
+        }
+
+        .importe-letra {
+            width: 55%;
+            padding: 15px;
+            background-color: #f4f4f4;
+            font-weight: 700;
+            font-size: 0.9em;
+            border-radius: 4px;
+            color: #444;
+        }
+
+        .totals-table-container {
+            width: 40%;
+        }
+        
+        .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .totals-table td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 0.95em;
+        }
+        
+        .totals-label {
+            background-color: var(--primary-blue);
+            color: white;
+            text-align: right;
+            width: 40%;
+        }
+        
+        .totals-value {
+            background-color: #fdfdfd;
+            text-align: right;
+        }
+
+        /* --- Nota Importante (Estilo solicitado) --- */
+        .nota-importante {
+            padding: 0 40px; /* Margen lateral para que el texto no sea tan ancho */
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        /* --- Tabla de Condiciones --- */
+        .condiciones-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .condiciones-table {
+            width: 80%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .condiciones-table tr:not(:last-child) td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .condiciones-table td {
+            padding: 8px 15px;
+            font-weight: 700;
+            color: #444;
+        }
+        
+        .condiciones-label {
+            background-color: #f9f9f9;
+            text-align: right;
+            width: 45%;
+            border-right: 1px solid #eee;
+        }
+        
+        .condiciones-value {
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        /* --- Barra de Referencia --- */
+        .barra-referencia {
+            background-color: #d46a2f; 
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
+        }
+
+        /* --- Pie de Página (Arial + Gris) --- */
+        .terminos-footer {
+            font-family: Arial, Helvetica, sans-serif; /* Tipografía solicitada */
+            color: var(--text-grey); /* Color original */
+            font-size: 0.7em;
+            text-align: justify;
+            line-height: 1.4;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-left">
+            <div class="logo-simulado">ASSERRA</div>
+            <div class="company-subtitle">SOLUCIONES INDUSTRIALES DE MÉXICO</div>
+            <div class="company-details">
+                <strong>RFC: XXXXXYYYYY</strong><br>
+                <strong>XXXXXXXXXXXX</strong><br>
+                <strong>CP:YYYY</strong><br>
+                AV MEXICO JAPON # 105 A, COL. XYXXYXYX<br>
+                CELAYA, GUANAJUATO, MEXICO
+            </div>
+        </div>
+        <div class="header-right">
+            <h1 class="cotizacion-title">COTIZACIÓN</h1>
+            <div class="folio">FOLIO: ASS-005-YAGM</div>
+            <div class="fecha">Celaya, Guanajuato, a 28 de Marzo de 2026</div>
+            <div class="validez-box">
+                VALIDEZ: (2 semanas)
+            </div>
+        </div>
+    </header>
+
+    <div class="cliente-wrapper">
+        <div class="cliente-card">
+            <div class="cliente-label">CLIENTE:</div>
+            <div class="cliente-data">
+                <strong style="font-size: 1.1em;">XXXX GUANAJUATO DE MEXICO SA DE CV</strong><br>
+                <strong>RFC:</strong> XXXXXYYYY<br>
+                <strong>AT'N:</strong> ING NOMBRE<br>
+                <strong>EMAIL:</strong> <a href="mailto:xxxx.xxxx@gmail.com">xxxx.xxxx@gmail.com</a><br>
+                <span style="padding-left: 55px;"></span> <a href="mailto:xxxx.xxxx@gmail.com">xxxx.xxxx@gmail.com</a><br>
+                <strong>TEL:</strong> 461 XXXXXXXX
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="main-table">
+            <thead>
+                <tr>
+                    <th style="width: 8%;">CANT.</th>
+                    <th style="width: 12%;">UNIDAD</th>
+                    <th style="width: 50%;">DESCRIPCIÓN</th>
+                    <th class="col-valor">VALOR UNITARIO</th>
+                    <th class="col-total">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-cant">20</td>
+                    <td class="col-unidad">PIEZA</td>
+                    <td class="col-desc">SUMINISTRO DE PLACA AL CARBON ¾ , MED 40CM DE ANCHO Y 30 CM DE LARGO CON UN DOBLES SEGÚN MUESTRA</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+                <tr style="height: 40px;"><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="totals-section">
+        <div class="importe-letra">
+            IMPORTE EN LETRA: <span style="font-weight: normal; font-style: italic; color: #666;">(PENDIENTE)</span>
+        </div>
+        <div class="totals-table-container">
+            <table class="totals-table">
+                <tr>
+                    <td class="totals-label">SUBTOTAL :</td>
+                    <td class="totals-value"></td>
+                </tr>
+                <tr>
+                    <td class="totals-label">IVA :</td>
+                    <td class="totals-value"></td>
+                </tr>
+                <tr>
+                    <td class="totals-label">TOTAL :</td>
+                    <td class="totals-value"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="nota-importante">
+        Nota: Es esencial corroborar que los números de parte coincidan con los requerimientos específicos del cliente. Le agradecemos que, al emitir su orden de compra o solicitud, haga referencia al número asignado a la presente cotización.
+    </div>
+
+    <div class="condiciones-container">
+        <table class="condiciones-table">
+            <tr>
+                <td class="condiciones-label">CONDICIÓN DE PAGO:</td>
+                <td class="condiciones-value"></td>
+            </tr>
+            <tr>
+                <td class="condiciones-label">TIEMPO DE ENTREGA:</td>
+                <td class="condiciones-value"></td>
+            </tr>
+            <tr>
+                <td class="condiciones-label">LUGAR DE ENTREGA:</td>
+                <td class="condiciones-value"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="barra-referencia">
+        FAVOR DE HACER REFERENCIA A ESTE NUMERO DE COTIZACIÓN AL EFECTUAR SU ORDEN DE COMPRA O PEDIDO.
+    </div>
+
+    <div class="terminos-footer">
+        Los precios cotizados bajo la modalidad libre a bordo en planta no incluyen los costos de envío ni las maniobras de carga. Esta propuesta económica se presenta en moneda nacional. En relación con la cancelación de órdenes de compra, si no se ha realizado ninguna inversión en materiales, se aplicará un cargo del 15% sobre el valor total. Si la cancelación ocurre después de haber adquirido los materiales necesarios, el cargo será del 50% del monto total cotizado. Cabe señalar que esta cotización por concepto de mano de obra tiene una vigencia de 30 días naturales a partir de su fecha de emisión. Es indispensable que la orden sea confirmada, ya sea de forma verbal o por escrito, y que se cuente con el acuse de recibo debidamente firmado y sellado por el departamento de producción. Asimismo, se informa que las órdenes cuya entrega se realiza en origen limitan la responsabilidad por cualquier riesgo o daño que pudiera ocurrir durante las maniobras de carga y el proceso de transporte.
+    </div>
+
+</div>
+
+</body>
+</html>
